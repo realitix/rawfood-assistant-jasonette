@@ -5,7 +5,7 @@ $jason:
             $load:
                 type: $network.request
                 options:
-                    url: https://abouletonfilm.fr/api-token-auth/
+                    url: ROOT_URL/api-token-auth/
                     method: post
                     content_type: json
                     data:
@@ -14,17 +14,17 @@ $jason:
                 success:
                     type: $session.set
                     options:
-                        domain: https://abouletonfilm.fr
+                        domain: ROOT_URL
                         header:
                             Authorization: "Token {{$jason.token}}"
                     success:
                         type: $href
                         options:
-                            url: file://out/receipe.json
+                            url: file://receipe.json
                 error:
                     type: $href
                     options:
-                        url: file://out/login.json
+                        url: file://login.json
     body:
         header:
             title: Chargement

@@ -7,6 +7,11 @@ import glob
 import json
 
 
+GLOBALS = {
+    'ROOT_URL': 'https://abouletonfilm.fr',
+    'file://': 'file://out/'
+}
+
 HERE = path.dirname(path.realpath(__file__))
 SRC = path.join(HERE, 'src')
 OUT = path.join(HERE, 'out')
@@ -19,7 +24,11 @@ for src_file in glob.glob(path.join(SRC, "*.yml")):
 
     # Read src ile
     with open(src_file, 'r') as f:
-        data = yaml.load(f, Loader=yaml.FullLoader)
+        content = f.read()
+        for key, value in GLOBALS.items():
+            content = content.replace(key, value)
+
+        data = yaml.load(content, Loader=yaml.FullLoader)
 
         # Write out file
         out_file_path = path.join(OUT, f"{filename}.json")
