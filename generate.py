@@ -23,8 +23,10 @@ def replace_in_file(content):
 
 HERE = path.dirname(path.realpath(__file__))
 SRC = path.join(HERE, 'src')
+INCLUDE = path.join(SRC, "includes")
 OUT = path.join(HERE, 'out')
-YamlIncludeConstructor.add_to_loader_class(loader_class=yaml.FullLoader, base_dir=SRC)
+YamlIncludeConstructor.add_to_loader_class(loader_class=yaml.FullLoader,
+                                           base_dir=INCLUDE)
 
 
 src_files = []

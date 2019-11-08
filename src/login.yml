@@ -4,12 +4,12 @@ $jason:
     body:
         style:
             border: none
-            background: #636363
+            background: "#636363"
         header:
             title: Connexion
             style:
-                background: #646464
-                color: #ffffff
+                background: "#646464"
+                color: "#ffffff"
         sections:
             - items:
                 - type: space
@@ -19,9 +19,9 @@ $jason:
                   placeholder: Nom d'utilisateur
                   style:
                     size: 20
-                    color: #8bb92d
+                    color: "#8bb92d"
                     font: HelveticaNeue-Bold
-                    background: #575757
+                    background: "#575757"
                     padding: 20
                 - type: space
                   height: 5
@@ -30,9 +30,9 @@ $jason:
                   placeholder: Mot de passe
                   style:
                     size: 20
-                    color: #8bb92d
+                    color: "#8bb92d"
                     font: HelveticaNeue-Bold
-                    background: #575757
+                    background: "#575757"
                     padding: 20
                     secure: true
                 - type: space
@@ -41,9 +41,9 @@ $jason:
                   text: Connexion >
                   style:
                     size: 20
-                    color: #ffffff
+                    color: "#ffffff"
                     font: HelveticaNeue-Bold
-                    background: #8bb92d
+                    background: "#8bb92d"
                     padding: 10
                     width: 100%
                     align: right
@@ -52,7 +52,7 @@ $jason:
                     options:
                         url: ROOT_URL/api-token-auth/
                         method: post
-                        content_type: $json
+                        content_type: json
                         data:
                             username: "{{$get.username}}"
                             password: "{{$get.password}}"
@@ -61,7 +61,7 @@ $jason:
                         options:
                             domain: ROOT_URL
                             header:
-                                Authorization: "Token {{global.user_token}}"
+                                Authorization: "Token {{$global.user_token}}"
                         success:
                             type: $global.set
                             options:

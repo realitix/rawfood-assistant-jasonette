@@ -22,12 +22,10 @@ $jason:
                         options:
                             url: file://out/receipe.json
                 error:
-                    type: $href
-                    options:
-                        url: file://out/login.json
+                    !include disconnect_to_login.yml
     body:
         header:
             title: Chargement
             style:
-                background: #646464
-                color: #ffffff
+                background: "#646464"
+                color: "#ffffff"

@@ -3,19 +3,7 @@ $jason:
         title: Déconnexion
         actions:
             $load:
-                type: $global.reset
-                options:
-                    items:
-                        - auth_username
-                        - auth_password
-                success:
-                    type: $session.reset
-                    options:
-                        domain: ROOT_URL
-                    success:
-                        type: $href
-                        options:
-                            url: file://out/login.json
+                !include disconnect_to_login.yml
     body:
         header:
             title: Déconnexion
