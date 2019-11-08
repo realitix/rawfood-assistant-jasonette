@@ -11,7 +11,7 @@ success:
     options:
         domain: ROOT_URL
         header:
-            Authorization: "Token {{$global.user_token}}"
+            Authorization: "Token {{$jason.token}}"
     success:
         type: $global.set
         options:
@@ -23,7 +23,18 @@ success:
                 url: file://out/receipe.json
                 transition: replace
 error:
-    type: $util.banner
+    # Clean session and global
+    type: $global.reset
     options:
-        title: Erreur
-        description: Identifiant ou mot de passe erroné
+        items:
+            - auth_username
+            - auth_password
+    success:
+        type: $session.reset
+        options:
+            domain: ROOT_URL
+        success:
+            type: $util.banner
+            options:
+                title: Erreur
+                description: Identifiant ou mot de passe erroné
