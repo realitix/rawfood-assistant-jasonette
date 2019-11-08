@@ -2,18 +2,15 @@ $jason:
     head:
         title: Recettes
         templates:
+            header:
+                title: Mes recettes
+                style: !include styles/body_header.yml
             body:
+                style: !include styles/body.yml
                 header:
                     title: "Mes recettes"
                 footer:
-                    tabs:
-                        items:
-                            - text: Planning
-                              url: file://out/planning.json
-                            - text: Recettes
-                              url: file://out/receipe.json
-                            - text: Déconnexion
-                              url: file://out/disconnect.json
+                    tabs: !include footer_tabs.yml
                 sections:
                     - items:
                         "{{$each $jason.results}}":

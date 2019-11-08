@@ -13,7 +13,7 @@ GLOBALS = {
 }
 
 
-def replace_in_file(content):
+def replace_in_content(content):
     # Globals
     for key, value in GLOBALS.items():
         content = content.replace(key, value)
@@ -36,11 +36,12 @@ for src_file in glob.glob(path.join(SRC, "*.yml")):
     # Read src ile
     with open(src_file, 'r') as f:
         content = f.read()
-        content = replace_in_file(content)
-
+        
         data = yaml.load(content, Loader=yaml.FullLoader)
+        json_str = json.dumps(data, indent=4)
+        json_to_write = replace_in_content(json_str)
 
         # Write out file
         out_file_path = path.join(OUT, f"{filename}.json")
         with open(out_file_path, 'w') as outfile:
-            json.dump(data, outfile, indent=4)
+            outfile.write(json_to_write)

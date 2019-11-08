@@ -2,14 +2,10 @@ $jason:
     head:
         title: Connexion
     body:
-        style:
-            border: none
-            background: "#636363"
+        style: !include styles/body.yml
         header:
             title: Connexion
-            style:
-                background: "#646464"
-                color: "#ffffff"
+            style: !include styles/body_header.yml
         sections:
             - items:
                 - type: space
@@ -17,63 +13,17 @@ $jason:
                 - type: textfield
                   name: username
                   placeholder: Nom d'utilisateur
-                  style:
-                    size: 20
-                    color: "#8bb92d"
-                    font: HelveticaNeue-Bold
-                    background: "#575757"
-                    padding: 20
+                  style: !include styles/login_field.yml
                 - type: space
                   height: 5
                 - type: textfield
                   name: password
                   placeholder: Mot de passe
-                  style:
-                    size: 20
-                    color: "#8bb92d"
-                    font: HelveticaNeue-Bold
-                    background: "#575757"
-                    padding: 20
-                    secure: true
+                  style: !include styles/login_field.yml
                 - type: space
                   height: 5
                 - type: label
                   text: Connexion >
-                  style:
-                    size: 20
-                    color: "#ffffff"
-                    font: HelveticaNeue-Bold
-                    background: "#8bb92d"
-                    padding: 10
-                    width: 100%
-                    align: right
-                  action:
-                    type: $network.request
-                    options:
-                        url: ROOT_URL/api-token-auth/
-                        method: post
-                        content_type: json
-                        data:
-                            username: "{{$get.username}}"
-                            password: "{{$get.password}}"
-                    success:
-                        type: $session.set
-                        options:
-                            domain: ROOT_URL
-                            header:
-                                Authorization: "Token {{$global.user_token}}"
-                        success:
-                            type: $global.set
-                            options:
-                                auth_username: "{{$root.$get.username}}"
-                                auth_password: "{{$root.$get.password}}"
-                            success:
-                                type: $href
-                                options:
-                                    url: file://out/receipe.json
-                                    transition: replace
-                    error:
-                        type: $util.banner
-                        options:
-                            title: Erreur
-                            description: Identifiant ou mot de passe erroné
+                  style: !include styles/login_connexion.yml
+                  action: !include connect_to_home.yml
+                    

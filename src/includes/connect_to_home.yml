@@ -1,0 +1,29 @@
+type: $network.request
+options:
+    url: ROOT_URL/api-token-auth/
+    method: post
+    content_type: json
+    data:
+        username: "{{$get.username}}"
+        password: "{{$get.password}}"
+success:
+    type: $session.set
+    options:
+        domain: ROOT_URL
+        header:
+            Authorization: "Token {{$global.user_token}}"
+    success:
+        type: $global.set
+        options:
+            auth_username: "{{$root.$get.username}}"
+            auth_password: "{{$root.$get.password}}"
+        success:
+            type: $href
+            options:
+                url: file://out/receipe.json
+                transition: replace
+error:
+    type: $util.banner
+    options:
+        title: Erreur
+        description: Identifiant ou mot de passe erroné
