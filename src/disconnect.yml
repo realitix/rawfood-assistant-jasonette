@@ -1,0 +1,24 @@
+$jason:
+    head:
+        title: Déconnexion
+        actions:
+            $load:
+                type: $global.reset
+                options:
+                    items:
+                        - auth_username
+                        - auth_password
+                success:
+                    type: $session.reset
+                    options:
+                        domain: ROOT_URL
+                    success:
+                        type: $href
+                        options:
+                            url: file://out/login.json
+    body:
+        header:
+            title: Déconnexion
+            style:
+                background: #646464
+                color: #ffffff

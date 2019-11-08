@@ -20,11 +20,11 @@ $jason:
                     success:
                         type: $href
                         options:
-                            url: file://receipe.json
+                            url: file://out/receipe.json
                 error:
                     type: $href
                     options:
-                        url: file://login.json
+                        url: file://out/login.json
     body:
         header:
             title: Chargement

@@ -1,0 +1,28 @@
+$jason:
+    head:
+        title: Recettes
+        templates:
+            body:
+                header:
+                    title: "Mes recettes"
+                footer:
+                    tabs:
+                        items:
+                            - text: Planning
+                              url: file://out/planning.json
+                            - text: Recettes
+                              url: file://out/receipe.json
+                            - text: Déconnexion
+                              url: file://out/disconnect.json
+                sections:
+                    - items:
+                        "{{$each $jason.results}}":
+                            type: label
+                            text: "{{name}}"
+        actions:
+            $load:
+                type: $network.request
+                options:
+                    url: ROOT_URL/receipes/
+                success:
+                    type: $render

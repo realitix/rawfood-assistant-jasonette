@@ -70,7 +70,7 @@ $jason:
                             success:
                                 type: $href
                                 options:
-                                    url: file://receipe.json
+                                    url: file://out/receipe.json
                                     transition: replace
                     error:
                         type: $util.banner

@@ -5,12 +5,21 @@ from yamlinclude import YamlIncludeConstructor
 from os import path
 import glob
 import json
+import re
 
 
 GLOBALS = {
     'ROOT_URL': 'https://abouletonfilm.fr',
-    'file://': 'file://out/'
 }
+
+
+def replace_in_file(content):
+    # Globals
+    for key, value in GLOBALS.items():
+        content = content.replace(key, value)
+    
+    return content
+
 
 HERE = path.dirname(path.realpath(__file__))
 SRC = path.join(HERE, 'src')
@@ -25,8 +34,7 @@ for src_file in glob.glob(path.join(SRC, "*.yml")):
     # Read src ile
     with open(src_file, 'r') as f:
         content = f.read()
-        for key, value in GLOBALS.items():
-            content = content.replace(key, value)
+        content = replace_in_file(content)
 
         data = yaml.load(content, Loader=yaml.FullLoader)
 
