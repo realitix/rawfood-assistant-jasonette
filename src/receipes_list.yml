@@ -32,10 +32,11 @@ $jason:
                                     data:
                                         name: "{{$jason.receipe_name}}"
                                 success:
-                                    type: $util.alert
+                                    type: $href
                                     options:
-                                        title: toto
-                                        description: "{{$root}}"
+                                        url: file://out/receipes_view.json
+                                        options:
+                                            receipe_url: "{{$jason.url}}"
                       items:
                         "{{#each $jason.results}}":
                             type: label

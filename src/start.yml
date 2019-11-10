@@ -20,7 +20,7 @@ $jason:
                     success:
                         type: $href
                         options:
-                            url: file://out/receipe.json
+                            url: file://out/receipes_list.json
                 error:
                     !include disconnect_to_login.yml
     body:

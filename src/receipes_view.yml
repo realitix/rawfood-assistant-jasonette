@@ -1,0 +1,24 @@
+$jason:
+    head:
+        title: Recette
+        templates:
+            header:
+                title: Ma recette
+                style: !include styles/body_header.yml
+            body:
+                style: !include styles/body.yml
+                header:
+                    title: "Ma recette"
+                footer:
+                    tabs: !include footer_tabs.yml
+                sections:
+                    - header:
+                        type: label
+                        text: "Recette {{$jason.name}}"
+        actions:
+            $load:
+                type: $network.request
+                options:
+                    url: "{{$params.receipe_url}}"
+                success:
+                    type: $render

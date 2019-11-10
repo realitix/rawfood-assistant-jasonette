@@ -47,7 +47,10 @@ for src_file in glob.glob(path.join(SRC, "*.yml")):
         out_file_path = path.join(OUT, f"{filename}.json")
 
         # Delete out file before writing it (i got a bug)
-        os.remove(out_file_path)
+        try:
+            os.remove(out_file_path)
+        except FileNotFoundError:
+            pass 
 
         # Write out file
         with io.open(out_file_path, 'w', encoding='utf8') as outfile:

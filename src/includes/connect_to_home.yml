@@ -20,7 +20,7 @@ success:
         success:
             type: $href
             options:
-                url: file://out/receipe.json
+                url: file://out/receipes_list.json
                 transition: replace
 error:
     # Clean session and global
