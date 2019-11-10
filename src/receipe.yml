@@ -12,8 +12,32 @@ $jason:
                 footer:
                     tabs: !include footer_tabs.yml
                 sections:
-                    - items:
-                        "{{$each $jason.results}}":
+                    - header:
+                        type: button
+                        text: Créer une nouvelle recettes
+                        action:
+                            type: $util.alert
+                            options:
+                                title: Création d'une recette
+                                description: Indiquez le nom de la recette à créer
+                                form:
+                                    - name: receipe_name
+                                      placeholder: Nom de la recette
+                            success:
+                                type: $network.request
+                                options:
+                                    url: ROOT_URL/receipes/
+                                    method: post
+                                    content_type: json
+                                    data:
+                                        name: "{{$jason.receipe_name}}"
+                                success:
+                                    type: $util.alert
+                                    options:
+                                        title: toto
+                                        description: "{{$root}}"
+                      items:
+                        "{{#each $jason.results}}":
                             type: label
                             text: "{{name}}"
         actions:

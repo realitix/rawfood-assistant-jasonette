@@ -22,7 +22,7 @@ $jason:
                   style: !include styles/login_field.yml
                 - type: space
                   height: 5
-                - type: label
+                - type: button
                   text: Connexion >
                   style: !include styles/login_connexion.yml
                   action: !include connect_to_home.yml
