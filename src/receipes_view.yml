@@ -13,10 +13,52 @@ $jason:
                     tabs: !include footer_tabs.yml
                 sections:
                     - header:
-                        type: label
-                        text: "Recette {{$jason.name}}"
+                        type: horizontal
+                        components:
+                            - type: label
+                              text: "Nom: {{$jason.name}}"
+                            - type: label
+                              text: "Nb personne: {{$jason.nb_people}}"
+                            - type: label
+                              text: "Note: {{$jason.stars}}"
+                            - type: button
+                              text: Nouvelle étape
+                              action:
+                                type: $util.alert
+                                options:
+                                    title: Création d'une nouvelle étape
+                                    description: Indiquez la description de l'étape
+                                    form:
+                                        - name: step_description
+                                success:
+                                    type: $network.request
+                                    options:
+                                        url: ROOT_URL/receipe-steps/
+                                        method: post
+                                        content_type: json
+                                        data:
+                                            receipe: "{{$jason.url}}"
+                                            description: "{{$jason.step_description}}"
+                                    success:
+                                        trigger: refresh_view
+                                    error:
+                                        type: $util.alert
+                                        options:
+                                            title: Erreur
+                                            description: Une erreur est survenue
+                      items:
+                        "{{#each $jason.steps}}":
+                            type: label
+                            text: "{{description}}"
+
         actions:
             $load:
+                type: $network.request
+                options:
+                    url: "{{$params.receipe_url}}"
+                success:
+                    type: $render
+            refresh_view:
                 type: $network.request
                 options:
                     url: "{{$params.receipe_url}}"
