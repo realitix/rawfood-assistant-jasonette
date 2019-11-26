@@ -50,14 +50,13 @@ $jason:
                         "{{#each $jason.steps}}":
                             type: label
                             text: "{{description}}"
-
+                            href:
+                                url: file://out/step_view.json
+                                options:
+                                    step_url: "{{url}}"
         actions:
             $load:
-                type: $network.request
-                options:
-                    url: "{{$params.receipe_url}}"
-                success:
-                    type: $render
+                trigger: refresh_view
             refresh_view:
                 type: $network.request
                 options:

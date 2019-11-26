@@ -1,0 +1,46 @@
+$jason:
+    head:
+        title: Etape
+        templates:
+            header:
+                title: Etape de la recette
+                style: !include styles/body_header.yml
+            body:
+                style: !include styles/body.yml
+                header:
+                    title: "Etape {{$jason.order}} / Durée: {{$jason.duration}}"
+                footer:
+                    tabs: !include footer_tabs.yml
+                sections:
+                    - header:
+                        type: button
+                        text: Ajouter un aliment
+                        action:
+                            type: $href
+                            options:
+                                url: file://out/step_add_ingredient.json
+                                options:
+                                    step_url: "{{$jason.url}}"
+                    - header:
+                        type: label
+                        text: Liste des ingrédients
+                      items:
+                        "{{#each $jason.aliment_ingredients}}":
+                            type: label
+                            text: "{{aliment.name}}"
+                    - header:
+                        type: label
+                        text: Liste des recettes
+                      items:
+                        "{{#each $jason.receipe_ingredients}}":
+                            type: label
+                            text: "{{receipe.name}}"
+        actions:
+            $load:
+                trigger: refresh_view
+            refresh_view:
+                type: $network.request
+                options:
+                    url: "{{$params.step_url}}"
+                success:
+                    type: $render

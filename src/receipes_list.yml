@@ -41,12 +41,10 @@ $jason:
                         "{{#each $jason.results}}":
                             type: label
                             text: "{{name}}"
-                            action:
-                                type: $href
+                            href:
+                                url: file://out/receipes_view.json
                                 options:
-                                    url: file://out/receipes_view.json
-                                    options:
-                                        receipe_url: "{{url}}"
+                                    receipe_url: "{{url}}"
         actions:
             $load:
                 type: $network.request
