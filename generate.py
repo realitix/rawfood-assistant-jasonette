@@ -11,7 +11,7 @@ import io
 
 
 GLOBALS = {
-    'ROOT_URL': 'https://abouletonfilm.fr',
+    'ROOT_URL': 'http://127.0.0.1:8000',
 }
 
 

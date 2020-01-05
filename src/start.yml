@@ -3,26 +3,13 @@ $jason:
         title: Chargement
         actions:
             $load:
-                type: $network.request
+                type: $util.wait
                 options:
-                    url: ROOT_URL/api-token-auth/
-                    method: post
-                    content_type: json
-                    data:
-                        username: "{{$global.auth_username}}"
-                        password: "{{$global.auth_password}}"
+                    time: 6000
                 success:
-                    type: $session.set
+                    type: $href
                     options:
-                        domain: ROOT_URL
-                        header:
-                            Authorization: "Token {{$jason.token}}"
-                    success:
-                        type: $href
-                        options:
-                            url: file://out/receipes_list.json
-                error:
-                    !include disconnect_to_login.yml
+                        url: file://out/receipes_list.json
     body:
         header:
             title: Chargement
