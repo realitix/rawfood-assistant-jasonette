@@ -3,13 +3,16 @@ $jason:
         title: Chargement
         actions:
             $load:
-                type: $util.wait
-                options:
-                    time: 6000
+                type: $rawfood.ready
                 success:
                     type: $href
                     options:
                         url: file://out/receipes_list.json
+                error:
+                    type: $util.alert
+                    options:
+                        title: Error
+                        description: Can't start backend service
     body:
         header:
             title: Chargement
