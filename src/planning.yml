@@ -1,0 +1,64 @@
+$jason:
+    head:
+        title: Recettes
+        templates:
+            header:
+                title: Planning
+                style: !include styles/body_header.yml
+            body:
+                style: !include styles/body.yml
+                header:
+                    title: Planning
+                footer:
+                    tabs: !include footer_tabs.yml
+                sections:
+                    - header:
+                        type: label
+                        text: "{{$get.selected_date}}"
+                        action:
+                            type: $util.datepicker
+                            options:
+                                only_date: true
+                                date_format: "dd/MM/yyyy"
+                                title: Sélectionner la date
+                                description: Date à sélectionner
+                            success:
+                                type: $set
+                                options:
+                                    selected_date: "{{$jason.value}}"
+                                success:
+                                    type: $render
+                      items:
+                        - type: button
+                          text: Ajouter un menu
+                          action:
+                            type: $util.datepicker
+                            options:
+                                date_format: "yyyy-MM-dd'T'HH:mm"
+                                title: Sélectionner la date
+                                description: Date du nouveau menu à créer
+                                ampm: false
+                            success:
+                                type: $network.request
+                                options:
+                                    url: ROOT_URL/meals/
+                                    method: post
+                                    data_type: json
+                                    content_type: json
+                                    data:
+                                        datetime: "{{$jason.value}}"
+                                        nb_people: 1
+                                success:
+                                    type: $href
+                                    options:
+                                        url: file://out/planning_meal.json
+                                        options:
+                                            meal_url: "{{$jason.url}}"
+                                error:
+                                    type: $util.alert
+                                    options:
+                                        title: Erreur
+                                        description: Une erreur est survenue
+        actions:
+            $load:
+                type: $render

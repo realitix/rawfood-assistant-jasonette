@@ -2,52 +2,37 @@ $jason:
     head:
         title: Ajout d'un ingrédient
         templates:
-            header:
-                title: Ajout d'un ingrédient
-                style: !include styles/body_header.yml
             body:
                 style: !include styles/body.yml
                 header:
-                    search:
-                        name: query
-                        placeholder: Rechercher un aliment
-                        action:
-                            trigger: request_search
+                    title: "Choix de la quantité de l'ingrédient"
                 sections:
                     - items:
-                        - type: $ok
-                          options:
-                            value_return_test: mama mia
-                        
+                        - type: label
+                          text: "Ajout: {{$params.aliment_name}}"
+                        - type: textfield
+                          name: quantity
+                          placeholder: Quantité en gramme
+                        - type: button
+                          text: Valider
+                          action:
+                            type: $network.request
+                            options:
+                                url: "{{$params.post_url}}"
+                                method: post
+                                data_type: json
+                                content_type: json
+                                data:
+                                    "{{$params.obj_key}}": "{{$params.obj_value}}"
+                                    aliment: "{{$params.aliment_url}}"
+                                    quantity: "{{$get.quantity}}"
+                            success:
+                                type: $back
+                            error:
+                                type: $util.alert
+                                options:
+                                    title: Erreur
+                                    description: Une erreur est survenue
         actions:
             $load:
-                trigger: refresh_view
-            refresh_view:
                 type: $render
-            request_search:
-                type: $network.request
-                options:
-                    url: "ROOT_URL/aliments/?search={{$get.query}}"
-                success:
-                    type: $render
-            debug:
-                type: $util.alert
-                options:
-                    title: debug
-                    description: "{{$root}}"
-            add_aliment:
-                type: $util.alert
-                options:
-                    title: "Ajout de l'ingrédient {{name}}"
-                    description: "Ajout de l'ingrédient {{name}}"
-                    form:
-                        - name: quantity
-                          placeholder: Quantité en grammes
-                success:
-                    type: "$set"
-                    options:
-                        last_quantity: "{{$jason.quantity}}"
-                    success:
-                        trigger: debug
-                        options:
-                            url_aliment: "l_toto__"

@@ -1,17 +1,20 @@
 $jason:
     head:
-        title: Etape
+        title: Recettes
         templates:
             header:
-                title: Etape de la recette
+                title: Repas
                 style: !include styles/body_header.yml
             body:
                 style: !include styles/body.yml
                 header:
-                    title: "Etape {{$jason.order}} / Durée: {{$jason.duration}}"
+                    title: Repas
                 footer:
                     tabs: !include footer_tabs.yml
                 sections:
+                    - header:
+                        type: label
+                        text: "Repas du {{$jason.datetime}}"
                     - header:
                         type: button
                         text: Ajouter un aliment
@@ -20,14 +23,14 @@ $jason:
                             options:
                                 url: file://out/step_add_ingredient.json
                                 options:
-                                    obj_key: step
+                                    obj_key: meal
                                     obj_value: "{{$jason.url}}"
-                                    post_url: ROOT_URL/receipe-step-aliments/
+                                    post_url: ROOT_URL/meal-aliments/
                     - header:
                         type: label
                         text: Liste des ingrédients
                       items:
-                        "{{#each $jason.aliment_ingredients}}":
+                        "{{#each $jason.aliments}}":
                             type: label
                             text: "{{aliment_detail.name}} / {{quantity}}g"
                     - header:
@@ -37,6 +40,7 @@ $jason:
                         "{{#each $jason.receipe_ingredients}}":
                             type: label
                             text: "{{receipe.name}}"
+
         actions:
             $load:
                 trigger: refresh_view
@@ -45,6 +49,6 @@ $jason:
             refresh_view:
                 type: $network.request
                 options:
-                    url: "{{$params.step_url}}"
+                    url: "{{$params.meal_url}}"
                 success:
                     type: $render

@@ -2,6 +2,6 @@ items:
     - text: Planning
       url: file://out/planning.json
     - text: Recettes
-      url: file://out/receipe.json
+      url: file://out/receipes_list.json
     - text: Déconnexion
       url: file://out/disconnect.json
