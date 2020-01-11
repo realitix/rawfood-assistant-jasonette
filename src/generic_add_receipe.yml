@@ -1,0 +1,52 @@
+$jason:
+    head:
+        title: Ajout d'une recette
+        templates:
+            header:
+                title: Ajout d'une recette
+                style: !include styles/body_header.yml
+            body:
+                style: !include styles/body.yml
+                header:
+                    search:
+                        name: query
+                        placeholder: Rechercher une recette
+                        live: true
+                        focus: true
+                        action:
+                            trigger: request_search
+                footer:
+                    tabs: !include footer_tabs.yml
+                sections:
+                    - items:
+                        "{{#each $jason.results}}":
+                            type: label
+                            text: "{{name}}"
+                            action:
+                                type: $network.request
+                                options:
+                                    url: "{{$params.post_url}}"
+                                    method: post
+                                    data_type: json
+                                    content_type: json
+                                    data:
+                                        "{{$params.obj_key}}": "{{$params.obj_value}}"
+                                        receipe: "{{url}}"
+                                success:
+                                    type: $back
+                                error:
+                                    type: $util.alert
+                                    options:
+                                        title: Erreur
+                                        description: Une erreur est survenue
+        actions:
+            $load:
+                trigger: refresh_view
+            refresh_view:
+                type: $render
+            request_search:
+                type: $network.request
+                options:
+                    url: "ROOT_URL/receipes/?search={{$get.query}}"
+                success:
+                    type: $render

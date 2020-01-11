@@ -23,7 +23,7 @@ $jason:
                             type: label
                             text: "{{name}}"
                             href:
-                                url: file://out/step_add_ingredient_quantity.json
+                                url: file://out/generic_add_ingredient_quantity.json
                                 clear_top: true
                                 options:
                                     aliment_url: "{{url}}"

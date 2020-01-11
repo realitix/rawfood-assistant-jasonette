@@ -15,28 +15,35 @@ $jason:
                     - header:
                         type: button
                         text: Ajouter un aliment
-                        action:
-                            type: $href
+                        href:
+                            url: file://out/generic_add_ingredient.json
                             options:
-                                url: file://out/step_add_ingredient.json
-                                options:
-                                    obj_key: step
-                                    obj_value: "{{$jason.url}}"
-                                    post_url: ROOT_URL/receipe-step-aliments/
+                                obj_key: step
+                                obj_value: "{{$jason.url}}"
+                                post_url: ROOT_URL/receipe-step-aliments/
+                    - header:
+                        type: button
+                        text: Ajouter une recette
+                        href:
+                            url: file://out/generic_add_receipe.json
+                            options:
+                                obj_key: step
+                                obj_value: "{{$jason.url}}"
+                                post_url: ROOT_URL/receipe-step-receipes/
                     - header:
                         type: label
                         text: Liste des ingrédients
                       items:
-                        "{{#each $jason.aliment_ingredients}}":
+                        "{{#each $jason.aliments}}":
                             type: label
                             text: "{{aliment_detail.name}} / {{quantity}}g"
                     - header:
                         type: label
                         text: Liste des recettes
                       items:
-                        "{{#each $jason.receipe_ingredients}}":
+                        "{{#each $jason.receipes}}":
                             type: label
-                            text: "{{receipe.name}}"
+                            text: "{{receipe_detail.name}}"
         actions:
             $load:
                 trigger: refresh_view
