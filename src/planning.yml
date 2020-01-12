@@ -14,12 +14,11 @@ $jason:
                 sections:
                     - header:
                         type: label
-                        text: "{{$get.selected_date}}"
+                        text: "{{rawfood.today($get.selected_date)}}"
                         action:
                             type: $util.datepicker
                             options:
                                 only_date: true
-                                date_format: "dd/MM/yyyy"
                                 title: Sélectionner la date
                                 description: Date à sélectionner
                             success:
@@ -59,6 +58,37 @@ $jason:
                                     options:
                                         title: Erreur
                                         description: Une erreur est survenue
+                    - items:
+                        "{{#each $jason.results}}":
+                            type: label
+                            text: "{{datetime}}"
         actions:
             $load:
-                type: $render
+                type: $script.include
+                options:
+                    items:
+                        - url: file://js/rawfood.js
+                success:
+                    trigger: init_datetime
+
+            $show:
+                trigger: refresh_view
+
+            init_datetime:
+                type: $set
+                options:
+                    selected_date: "{{rawfood.get_timestamp()}}"
+                success:
+                    trigger: refresh_view
+
+            refresh_view:
+                type: $util.alert
+                options:
+                    title: My title
+                    description: "{{rawfood.begin_day($get.selected_date)}}  {{rawfood.end_day($get.selected_date)}}"
+                type: $network.request
+                options:
+                    url:  "ROOT_URL/meals/?datetime__gte={{rawfood.begin_day($get.selected_date)}}&datetime__lte={{rawfood.end_day($get.selected_date)}}"
+                success:
+                    type: $render
+            
