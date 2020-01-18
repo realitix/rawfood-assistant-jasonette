@@ -49,7 +49,7 @@ $jason:
                             href:
                                 url: file://out/step_view.json
                                 options:
-                                    step_url: "{{url}}"
+                                    step_id: "{{id}}"
         actions:
             $load:
                 trigger: refresh_view
