@@ -31,14 +31,10 @@ $jason:
                                     form:
                                         - name: step_description
                                 success:
-                                    type: $network.request
+                                    type: $rawfood.createReceipeStep
                                     options:
-                                        url: ROOT_URL/receipe-steps/
-                                        method: post
-                                        content_type: json
-                                        data:
-                                            receipe: "{{$jason.url}}"
-                                            description: "{{$jason.step_description}}"
+                                        receipe_id: "{{$jason.id}}"
+                                        description: "{{$jason.step_description}}"
                                     success:
                                         trigger: refresh_view
                                     error:
@@ -58,13 +54,8 @@ $jason:
             $load:
                 trigger: refresh_view
             refresh_view:
-                # type: $network.request
-                # options:
-                #     id: "{{$params.receipe_id}}"
-                # success:
-                #     type: $render
                 type: $rawfood.viewReceipe
                 options:
-                    id: "{{$params.receipe_id}}"
+                    receipe_id: "{{$params.receipe_id}}"
                 success:
                     type: $render
