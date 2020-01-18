@@ -26,7 +26,7 @@ $jason:
                                 options:
                                     selected_date: "{{$jason.value}}"
                                 success:
-                                    type: $render
+                                    trigger: refresh_view
                       items:
                         - type: button
                           text: Ajouter un menu
@@ -62,6 +62,11 @@ $jason:
                         "{{#each $jason.results}}":
                             type: label
                             text: "{{datetime}}"
+                            href:
+                                url: file://out/planning_meal.json
+                                options:
+                                    meal_url: "{{url}}"
+
         actions:
             $load:
                 type: $script.include
@@ -82,10 +87,6 @@ $jason:
                     trigger: refresh_view
 
             refresh_view:
-                type: $util.alert
-                options:
-                    title: My title
-                    description: "{{rawfood.begin_day($get.selected_date)}}  {{rawfood.end_day($get.selected_date)}}"
                 type: $network.request
                 options:
                     url:  "ROOT_URL/meals/?datetime__gte={{rawfood.begin_day($get.selected_date)}}&datetime__lte={{rawfood.end_day($get.selected_date)}}"

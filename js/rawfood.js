@@ -1,6 +1,6 @@
 var rawfood = (function () {
     var get_timestamp = function() {
-        return Date.now();
+        return Date.now()/1000;
     }
 
     // Prefix number for always two zero
@@ -10,7 +10,7 @@ var rawfood = (function () {
 
     var today = function(timestamp) {
         // Returned format yyyy-MM-dd'T'HH:mm
-        var date = new Date(timestamp);
+        var date = new Date(parseInt(timestamp)*1000);
         var y = date.getFullYear();
         // 0-11 becomes 1-12
         var m = date.getMonth() + 1; 

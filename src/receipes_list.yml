@@ -24,31 +24,25 @@ $jason:
                                     - name: receipe_name
                                       placeholder: Nom de la recette
                             success:
-                                type: $network.request
+                                type: $rawfood.createReceipe
                                 options:
-                                    url: ROOT_URL/receipes/
-                                    method: post
-                                    content_type: json
-                                    data:
-                                        name: "{{$jason.receipe_name}}"
+                                    name: "{{$jason.receipe_name}}"
                                 success:
                                     type: $href
                                     options:
                                         url: file://out/receipes_view.json
                                         options:
-                                            receipe_url: "{{$jason.url}}"
+                                            receipe_id: "{{$jason.id}}"
                       items:
-                        "{{#each $jason.results}}":
+                        "{{#each $jason}}":
                             type: label
                             text: "{{name}}"
                             href:
                                 url: file://out/receipes_view.json
                                 options:
-                                    receipe_url: "{{url}}"
+                                    receipe_id: "{{id}}"
         actions:
             $load:
-                type: $network.request
-                options:
-                    url: ROOT_URL/receipes/
+                type: $rawfood.listReceipes
                 success:
                     type: $render

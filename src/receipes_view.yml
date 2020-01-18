@@ -58,8 +58,13 @@ $jason:
             $load:
                 trigger: refresh_view
             refresh_view:
-                type: $network.request
+                # type: $network.request
+                # options:
+                #     id: "{{$params.receipe_id}}"
+                # success:
+                #     type: $render
+                type: $rawfood.viewReceipe
                 options:
-                    url: "{{$params.receipe_url}}"
+                    id: "{{$params.receipe_id}}"
                 success:
                     type: $render
