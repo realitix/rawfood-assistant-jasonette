@@ -50,8 +50,11 @@ $jason:
             $show:
                 trigger: refresh_view
             refresh_view:
-                type: $network.request
+                type: $rawfood.viewReceipeStep
                 options:
-                    url: "{{$params.step_url}}"
+                    step_id: "{{$params.step_id}}"
+                # type: $network.request
+                # options:
+                #     url: "{{$params.step_url}}"
                 success:
                     type: $render
