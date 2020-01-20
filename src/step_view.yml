@@ -18,32 +18,32 @@ $jason:
                         href:
                             url: file://out/generic_add_ingredient.json
                             options:
-                                obj_key: step
-                                obj_value: "{{$jason.url}}"
-                                post_url: ROOT_URL/receipe-step-aliments/
+                                obj_key: step_id
+                                obj_value: "{{$jason.id}}"
+                                action_name: $rawfood.createReceipeStepAliment
                     - header:
                         type: button
                         text: Ajouter une recette
                         href:
                             url: file://out/generic_add_receipe.json
                             options:
-                                obj_key: step
-                                obj_value: "{{$jason.url}}"
-                                post_url: ROOT_URL/receipe-step-receipes/
+                                obj_key: step_id
+                                obj_value: "{{$jason.id}}"
+                                action_name: $rawfood.createReceipeStepReceipe
                     - header:
                         type: label
                         text: Liste des ingrédients
                       items:
                         "{{#each $jason.aliments}}":
                             type: label
-                            text: "{{aliment_detail.name}} / {{quantity}}g"
+                            text: "{{alimentDetail.name}} / {{quantity}}g"
                     - header:
                         type: label
                         text: Liste des recettes
                       items:
                         "{{#each $jason.receipes}}":
                             type: label
-                            text: "{{receipe_detail.name}}"
+                            text: "{{receipeDetail.name}}"
         actions:
             $load:
                 trigger: refresh_view

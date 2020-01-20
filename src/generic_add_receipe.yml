@@ -19,19 +19,14 @@ $jason:
                     tabs: !include footer_tabs.yml
                 sections:
                     - items:
-                        "{{#each $jason.results}}":
+                        "{{#each $jason}}":
                             type: label
                             text: "{{name}}"
                             action:
-                                type: $network.request
+                                type: "{{$params.action_name}}"
                                 options:
-                                    url: "{{$params.post_url}}"
-                                    method: post
-                                    data_type: json
-                                    content_type: json
-                                    data:
-                                        "{{$params.obj_key}}": "{{$params.obj_value}}"
-                                        receipe: "{{url}}"
+                                    "{{$params.obj_key}}": "{{$params.obj_value}}"
+                                    receipe_id: "{{id}}"
                                 success:
                                     type: $back
                                 error:
@@ -45,8 +40,11 @@ $jason:
             refresh_view:
                 type: $render
             request_search:
-                type: $network.request
+                type: $rawfood.searchReceipes
                 options:
-                    url: "ROOT_URL/receipes/?search={{$get.query}}"
+                    search: "{{$get.query}}"
+                # type: $network.request
+                # options:
+                #     url: "ROOT_URL/receipes/?search={{$get.query}}"
                 success:
                     type: $render

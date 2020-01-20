@@ -16,16 +16,21 @@ $jason:
                         - type: button
                           text: Valider
                           action:
-                            type: $network.request
+                            type: "{{$params.action_name}}"
                             options:
-                                url: "{{$params.post_url}}"
-                                method: post
-                                data_type: json
-                                content_type: json
-                                data:
-                                    "{{$params.obj_key}}": "{{$params.obj_value}}"
-                                    aliment: "{{$params.aliment_url}}"
-                                    quantity: "{{$get.quantity}}"
+                                "{{$params.obj_key}}": "{{$params.obj_value}}"
+                                aliment_id: "{{$params.aliment_id}}"
+                                quantity: "{{$get.quantity}}"
+                            # type: $network.request
+                            # options:
+                            #     url: "{{$params.post_url}}"
+                            #     method: post
+                            #     data_type: json
+                            #     content_type: json
+                            #     data:
+                            #         "{{$params.obj_key}}": "{{$params.obj_value}}"
+                            #         aliment: "{{$params.aliment_url}}"
+                            #         quantity: "{{$get.quantity}}"
                             success:
                                 type: $back
                             error:

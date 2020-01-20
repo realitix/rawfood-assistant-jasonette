@@ -19,17 +19,27 @@ var rawfood = (function () {
     }
 
     var begin_day = function(timestamp) {
-        return today(timestamp) + 'T00:01';
+        return today(timestamp) + 'T00:01:00';
+    }
+
+    var begin_day_timestamp = function(timestamp) {
+        var nb_seconds = 86400;
+        return Math.floor(timestamp / nb_seconds) * nb_seconds;
     }
 
     var end_day = function(timestamp) {
-        return today(timestamp) + 'T23:59';
+        return today(timestamp) + 'T23:59:00';
+    }
+
+    var end_day_timestamp = function(timestamp) {
+        var nb_seconds = 86400;
+        return begin_day_timestamp(timestamp) + nb_seconds;
     }
 
     return {
+        'today': today,
         'get_timestamp': get_timestamp,
-        'begin_day': begin_day,
-        'end_day': end_day,
-        'today': today
+        'begin_day_timestamp': begin_day_timestamp,
+        'end_day_timestamp': end_day_timestamp
     }
 })();

@@ -14,7 +14,7 @@ $jason:
                 sections:
                     - header:
                         type: label
-                        text: "Repas du {{$jason.datetime}}"
+                        text: "Repas du {{$jason.timestamp}}"
                     - header:
                         type: button
                         text: Ajouter un aliment
@@ -54,8 +54,8 @@ $jason:
             $show:
                 trigger: refresh_view
             refresh_view:
-                type: $network.request
+                type: $rawfood.viewMeal
                 options:
-                    url: "{{$params.meal_url}}"
+                    meal_id: "{{$params.meal_id}}"
                 success:
                     type: $render

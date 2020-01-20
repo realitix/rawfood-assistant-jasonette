@@ -19,17 +19,17 @@ $jason:
                     tabs: !include footer_tabs.yml
                 sections:
                     - items:
-                        "{{#each $jason.results}}":
+                        "{{#each $jason}}":
                             type: label
                             text: "{{name}}"
                             href:
                                 url: file://out/generic_add_ingredient_quantity.json
                                 clear_top: true
                                 options:
-                                    aliment_url: "{{url}}"
+                                    aliment_id: "{{id}}"
                                     obj_key: "{{$params.obj_key}}"
                                     obj_value: "{{$params.obj_value}}"
-                                    post_url: "{{$params.post_url}}"
+                                    action_name: "{{$params.action_name}}"
                                     aliment_name: "{{name}}"
         actions:
             $load:
@@ -37,8 +37,11 @@ $jason:
             refresh_view:
                 type: $render
             request_search:
-                type: $network.request
+                type: $rawfood.searchAliments
                 options:
-                    url: "ROOT_URL/aliments/?search={{$get.query}}"
+                    search: "{{$get.query}}"
+                # type: $network.request
+                # options:
+                #     url: "ROOT_URL/aliments/?search={{$get.query}}"
                 success:
                     type: $render
