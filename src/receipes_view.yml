@@ -44,14 +44,34 @@ $jason:
                                             description: Une erreur est survenue
                       items:
                         "{{#each $jason.steps}}":
-                            type: label
-                            text: "{{description}}"
-                            href:
-                                url: file://out/step_view.json
-                                options:
-                                    step_id: "{{id}}"
+                            type: vertical
+                            components:
+                                - type: label
+                                  text: "{{description}}"
+                                  href:
+                                    url: file://out/step_view.json
+                                    options:
+                                        step_id: "{{id}}"
+                                - type: label
+                                  text: ----- Ingrédients -----
+                                - type: vertical
+                                  style:
+                                    spacing: 30
+                                  components:
+                                    "{{#each aliments}}":
+                                        type: label
+                                        text: "{{alimentDetail.name}} / {{quantity}}g"
+                                - type: label
+                                  text: ----- Recettes -----
+                                - type: vertical
+                                  components:
+                                    "{{#each receipes}}":
+                                        type: label
+                                        text: "{{receipeDetail.name}}"
         actions:
             $load:
+                trigger: refresh_view
+            $show:
                 trigger: refresh_view
             refresh_view:
                 type: $rawfood.viewReceipe
